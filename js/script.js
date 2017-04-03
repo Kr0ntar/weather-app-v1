@@ -23,7 +23,7 @@ function searchWeather() {
     weatherBox.style.display = 'none';
     var http = new XMLHttpRequest();
     var apiKey = '9d541120415518673d3e14234e91c498';
-    var url = 'https://api.openweathermap.org/data/2.5/weather?q=' + cityName + '&units=metric&appid=' + apiKey;
+    var url = 'http://api.openweathermap.org/data/2.5/weather?q=' + cityName + '&units=metric&appid=' + apiKey;
     var method = 'GET';
 
     http.open(method, url);
