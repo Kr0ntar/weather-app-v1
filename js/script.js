@@ -19,14 +19,13 @@ function searchWeather() {
     if (cityName.trim().length == 0) {
         return alert('Please enter a City Name');   
     }
-    loadingText.style.display = 'block';
-    weatherBox.style.display = 'none';
     var http = new XMLHttpRequest();
     var apiKey = '9d541120415518673d3e14234e91c498';
     var url = 'http://api.openweathermap.org/data/2.5/weather?q=' + cityName + '&units=metric&appid=' + apiKey;
+    var proxy = 'https://cors-anywhere.herokuapp.com/';
     var method = 'GET';
 
-    http.open(method, url);
+    http.open(method, proxy + url);
     http.onreadystatechange = function() {
         if (http.readyState == XMLHttpRequest.DONE && http.status === 200) {
             var data = JSON.parse(http.responseText);
@@ -34,9 +33,13 @@ function searchWeather() {
             weatherData.temperature = data.main.temp;
             updateWeather(weatherData);
         } else if (http.readyState === XMLHttpRequest.DONE) {
-            alert('Something went wrong!');
+            return alert('Something went wrong!');
         }
     };
+
+    loadingText.style.display = 'block';
+    weatherBox.style.display = 'none';
+
     http.send();
 }
 
